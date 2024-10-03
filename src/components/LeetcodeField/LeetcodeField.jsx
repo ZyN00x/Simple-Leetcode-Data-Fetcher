@@ -4,13 +4,7 @@ import fetchUserInfo from "../utils/fetchUserinfo";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import Results from "../Result/Results";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import fetchUserDetails from "../utils/fetchUserDetails";

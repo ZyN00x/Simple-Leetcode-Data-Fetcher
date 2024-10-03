@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchUserInfo from "../utils/fetchUserinfo";
-import { Results } from "../Result/Results";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import Results from "../Result/Results";
 
 import {
   Card,
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import fetchUserDetails from "../utils/fetchUserDetails";
 
 export const LeetcodeField = () => {
@@ -35,8 +34,7 @@ export const LeetcodeField = () => {
   const results = useQuery({
     queryKey: ["UserData", userState],
     queryFn: fetchUserInfo,
-    fetchUserDetails,
-    enabled: isSubmitted && !!userState,
+    enabled: !!isSubmitted,
   });
 
   const detailedResults = useQuery({
@@ -46,12 +44,12 @@ export const LeetcodeField = () => {
   });
 
   return (
-    <div className="flex  my-10 w-full justify-center">
-      <Card className="flex flex-col justify-center items-center max-w-[500px] w-[500px]">
+    <div className=" flex flex-col  gap-3  m-10 w-screen justify-center items-center">
+      <Card className="flex flex-col justify-center items-center max-w-[500px] w-full">
         <CardHeader>
           <CardTitle className="text-3xl">Fetch your Leetcode Data</CardTitle>
         </CardHeader>
-        <CardContent className="flex space-x-2">
+        <CardContent className="flex space-x-5">
           <Input
             type="username"
             placeholder="username"
@@ -70,6 +68,9 @@ export const LeetcodeField = () => {
           )}
         </CardContent>
       </Card>
+      {!!results.data && (
+        <Results userinfo={results.data} userDetails={detailedResults.data} />
+      )}
     </div>
   );
 };
